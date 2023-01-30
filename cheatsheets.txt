@@ -1,0 +1,11 @@
+npm i -D tailwindcss postcss autoprefixer
+npx i -D tailwindcss postcss autoprefixer
+
+npx tailwindcss init -p
+
+
+isko tailwind.config.js file mein "content: []," content wale is array mein paste karna hai
+"./src/**/*.{js,jsx,ts,tsx}",
+
+isse form me jo validation hote hai wo sab notification ke form mein display ho jaayege
+npm i formik react-hot-toast
