@@ -9,3 +9,12 @@ isko tailwind.config.js file mein "content: []," content wale is array mein past
 
 isse form me jo validation hote hai wo sab notification ke form mein display ho jaayege
 npm i formik react-hot-toast
+
+***************for server site code***************
+
+npm init -y
+npm i express cors mongoose mongodb-memory-server multer
+npm i http-status-codes bcrypt
+npm i jsonwebtoken
+
+openssl rand -base64 32
