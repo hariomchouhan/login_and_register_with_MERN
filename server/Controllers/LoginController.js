@@ -50,3 +50,28 @@ export async function login(request, response) {
         response.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
     }
 }
+
+export async function fetchAllUsers(request, response) {
+    try {
+        const users = await UserModel.find();
+        response.status(StatusCodes.OK).json(users);
+    } catch (error) {
+        response.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
+    }
+}
+
+export async function fetchByUsername(request, response) {
+    try {
+        const username = await UserModel.findOne({ username: request.params.username });
+        if(username){
+            response.status(StatusCodes.OK).json(username);
+        }
+        else{
+            response.status(StatusCodes.BAD_REQUEST).json({ message: "Invalid username" });
+        }
+    } catch (error) {
+        console.log(error);
+        response.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
+    }
+
+}
