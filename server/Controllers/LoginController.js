@@ -75,3 +75,20 @@ export async function fetchByUsername(request, response) {
     }
 
 }
+
+export async function updateUser(request, response) {
+    try {
+        const exists = await UserModel.findById(request.params.id );
+        if(exists){
+            const user =  await exists.updateOne(request.body);
+            response.status(StatusCodes.NO_CONTENT).json();
+        }
+        else{
+            response.status(StatusCodes.BAD_REQUEST).json({ message: "User Not Found!" });
+        }
+    } catch (error) {
+        console.log(error);
+        response.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
+    }
+
+}
