@@ -2,7 +2,7 @@ import { UserModel } from '../Models/UserModule.js';
 import { StatusCodes } from 'http-status-codes';
 import bcrypt from "bcrypt";
 import jwt from 'jsonwebtoken';
-
+import otpGenerator from 'otp-generator';
 // register a new user
 
 export async function register(request, response) {
@@ -79,6 +79,7 @@ export async function fetchByUsername(request, response) {
 export async function updateUser(request, response) {
     try {
         const exists = await UserModel.findById(request.params.id );
+        // const {userId} = request.user;
         if(exists){
             const user =  await exists.updateOne(request.body);
             response.status(StatusCodes.NO_CONTENT).json();
@@ -91,4 +92,21 @@ export async function updateUser(request, response) {
         response.status(StatusCodes.INTERNAL_SERVER_ERROR).json();
     }
 
+}
+
+export async function generateOtp(request, response) {
+    request.app.locals.OTP  = otpGenerator.generate(6, {lowerCaseAlphabets: false, upperCaseAlphabets: false, specialChars: false});
+    response.status(StatusCodes.CREATED).json({ code: request.app.locals.OTP});
+}
+
+export async function verifyOtp(request, response) {
+    const { code} = request.query;
+    if(parseInt(code) === parseInt(request.app.locals.OTP)){
+        request.app.locals.OTP = null; // reset the OTP value
+        request.app.locals.resetSession = true; // start session for reset password
+        response.status(StatusCodes.OK).json({ message: "OTP Verified" });
+    }
+    else{
+        response.status(StatusCodes.BAD_REQUEST).json({ message: "Invalid OTP" });
+    }
 }

@@ -16,5 +16,5 @@ npm init -y
 npm i express cors mongoose mongodb-memory-server multer
 npm i http-status-codes bcrypt
 npm i jsonwebtoken
-
+npm i otp-generator
 openssl rand -base64 32

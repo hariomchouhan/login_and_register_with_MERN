@@ -9,6 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(loginRouter);
+app.disable('x-powered-by');
 
 app.listen(process.env.SERVER_PORT || 5000, () =>{
     configureDb();
