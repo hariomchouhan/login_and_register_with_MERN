@@ -1,5 +1,5 @@
 import express from "express";
-import { fetchAllUsers, fetchByUsername, generateOtp, login, register, updateUser, verifyOtp } from "../Controllers/LoginController.js";
+import { fetchAllUsers, fetchByUsername, generateOtp, login, register, resetPassword, updateUser, verifyOtp } from "../Controllers/LoginController.js";
 import { localVariable, VerifyToken } from "../Middlewares/VerifyToken.js";
 
 const loginRouter = express.Router();
@@ -16,11 +16,6 @@ loginRouter.get('/', fetchAllUsers);
 
 /* PUT Methods */
 loginRouter.put('/updateuser/:id', VerifyToken, updateUser);
-
-
-
-
-
-
+loginRouter.put('/resetpassword', resetPassword);
 
 export default loginRouter;

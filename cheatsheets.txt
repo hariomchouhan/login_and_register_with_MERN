@@ -17,4 +17,5 @@ npm i express cors mongoose mongodb-memory-server multer
 npm i http-status-codes bcrypt
 npm i jsonwebtoken
 npm i otp-generator
+npm i nodemailer mailgen
 openssl rand -base64 32
